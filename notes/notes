@@ -1,0 +1,46 @@
+conda create -n csdfs python=3.10 -y
+conda activate csdfs
+
+# Install PyTorch (CPU-only example)
+conda install pytorch torchvision torchaudio cpuonly -c pytorch -y
+
+# If you have an NVIDIA GPU and want CUDA, replace the above with the appropriate channel spec,
+# for example (example only — choose the CUDA version that matches your system):
+# conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia -y
+
+
+pip install fairscale
+pip install fire
+pip install sentencepiece
+
+
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+
+# Install PyTorch (CPU-only)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+
+# Or install the CUDA-enabled wheel matching your CUDA version (use PyTorch's recommended wheel)
+# Then:
+pip install fairscale
+pip install fire
+pip install sentencepiece
+
+
+name: csdfs
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - numpy=1.26
+  - scipy=1.11
+  - matplotlib=3.8
+  - pytorch=2.0.1  # pin to the version you validated
+  - pip:
+    - fairscale==0.4.13
+    - fire==0.5.0
+    - sentencepiece==0.1.99
